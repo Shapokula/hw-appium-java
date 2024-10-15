@@ -45,16 +45,16 @@ public class AppTest {
     @BeforeEach
     public void createMainScreen() {
         mainScreen = new MainScreen(driver);
-        mainScreen.textToBeChanged.isDisplayed();
-        mainScreen.buttonChange.isDisplayed();
-        mainScreen.userInput.isDisplayed();
     }
 
     @Test
     public void changeToEmptyText() {
+        mainScreen.textToBeChanged.isDisplayed();
         var initialText = mainScreen.textToBeChanged.getText();
 
+        mainScreen.userInput.isDisplayed();
         mainScreen.userInput.sendKeys("");
+        mainScreen.buttonChange.isDisplayed();
         mainScreen.buttonChange.click();
         var result1 = mainScreen.textToBeChanged.getText();
         Assertions.assertEquals(initialText, result1);
@@ -70,7 +70,9 @@ public class AppTest {
         ActivityScreen activityScreen = new ActivityScreen(driver);
 
         var textToInput = "Hello";
+        mainScreen.userInput.isDisplayed();
         mainScreen.userInput.sendKeys(textToInput);
+        mainScreen.buttonActivity.isDisplayed();
         mainScreen.buttonActivity.click();
         activityScreen.text.isDisplayed();
         Assertions.assertEquals(textToInput, activityScreen.text.getText());
